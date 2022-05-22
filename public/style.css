@@ -1,0 +1,16 @@
+*{
+    margin: 0;
+    padding: 0;
+    background-color: rgb(145, 169, 170);
+}
+
+body{
+    font-family: Helvetica, Arial, sans-serif;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+h1{
+    margin: auto;
+    text-decoration: underline red;
+}
