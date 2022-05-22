@@ -3,7 +3,7 @@ import express from 'express';
 import { check } from 'express-validator';
 import { UsuariosGet, UsuariosPost, UsuariosPut, UsuariosDelete } from '../controllers/usuarios.js';
 import { emailExiste, esRoleValido, existeUsuarioPorId } from '../helpers/db-validatos.js';
-import { validarCampos } from '../middlewares/validar-campos.js';
+import {validarCampos, validarJWT, esAdminRole} from '../middlewares/index.js';
 
 
 const router= express.Router();
@@ -28,6 +28,8 @@ router.post('/',[
 ], UsuariosPost);
 
 router.delete('/:id', [
+    validarJWT,
+    esAdminRole,    
     check('id', 'No es un ID valido').isMongoId(),
     check('id').custom(existeUsuarioPorId),
     validarCampos
