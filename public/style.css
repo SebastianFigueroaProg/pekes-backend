@@ -7,10 +7,8 @@
 body{
     font-family: Helvetica, Arial, sans-serif;
     display: flex;
-    width: 100vw;
-    height: 100vh;
+    flex-direction: column;    
 }
 h1{
-    margin: auto;
     text-decoration: underline red;
 }
