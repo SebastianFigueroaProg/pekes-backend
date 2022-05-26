@@ -40,7 +40,13 @@
             //console.log('id_token', response.credential);
             const body = { id_token: response.credential}
 
-            fetch('http://localhost:8000/auth/google',{
+            console.log(window.location.hostname.includes('localhost'))
+                        
+            let url = (window.location.hostname.includes('localhost'))
+                        ? 'http://localhost:8000/auth/google'
+                        :'https://restserver-pekestech.herokuapp.com/auth/google'
+
+            fetch(url,{
                 method: 'POST',
                 headers: {
                     'content-Type': 'application/json'
