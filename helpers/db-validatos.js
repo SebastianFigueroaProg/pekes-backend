@@ -40,3 +40,14 @@ export const existeProductoPorId = async( id = '')=>{
             throw new Error(`El Id no existe ${id}, no esta registrado`);            
         }
 }
+
+//Validar colecciones Permitidas
+
+export const coleccionPermitidas = (coleccion='', colecciones=[]) =>{
+    const incluida = colecciones.includes(coleccion);
+
+    if (!incluida) {
+        throw new Error(`La coleccion ${coleccion} no es permitida, ${colecciones}`);
+    }
+    return true;
+}
