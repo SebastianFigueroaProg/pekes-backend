@@ -1,5 +1,5 @@
+import { Categoria, Producto, Usuario } from '../models/index.js';
 import Role from '../models/role.js';
-import Usuario from '../models/usuario.js';
 
 //Verificar el rol con la BD
 export const esRoleValido = async(rol = '') =>{
@@ -21,6 +21,22 @@ export const emailExiste = async( correo = '')=>{
 export const existeUsuarioPorId = async( id = '')=>{    
     const existeUsuario = await Usuario.findById(id);
         if (!existeUsuario) {
+            throw new Error(`El Id no existe ${id}, no esta registrado`);            
+        }
+}
+
+//Verificar si la categoria existe
+export const existeCategoriaPorId = async( id = '')=>{    
+    const existeCategoria = await Categoria.findById(id);
+        if (!existeCategoria) {
+            throw new Error(`El Id no existe ${id}, no esta registrado`);            
+        }
+}
+
+//Verificar si la producto existe
+export const existeProductoPorId = async( id = '')=>{    
+    const existeProducto = await Producto.findById(id);
+        if (!existeProducto) {
             throw new Error(`El Id no existe ${id}, no esta registrado`);            
         }
 }
