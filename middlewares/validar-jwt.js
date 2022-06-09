@@ -24,14 +24,15 @@ export const validarJWT = async (req,res,next) =>{
                 msg:'Token no valido - usuario no existe en DB'
             });
         }
-
+        
         req.usuario = usuario;
-        next();    
+        
     } catch (error) {
-        console.log(error);
         res.status(401).json({
             msg:'Token no valido'
         });
     }
+
+    next();  
 
 }

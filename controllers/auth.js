@@ -90,3 +90,30 @@ export const googleSignIn = async(req, res)=>{
     }
 
 }
+
+export const revalidarToken = async (req, res = response ) => {
+
+    const {id,nombre, correo, estado, rol}  = req.usuario;
+    
+    try {
+
+        // Generar JWT
+        const token = await generarJWT( id );
+    
+        res.json({
+            ok: true,
+            id,
+            nombre,
+            correo,
+            estado,
+            rol,
+            token
+        })
+        
+    } catch (error) {
+        res.status(401).json({
+            ok:false,
+            msg: 'El token ya expiro'
+        })  
+    }
+}
