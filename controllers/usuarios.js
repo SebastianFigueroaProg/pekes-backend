@@ -59,6 +59,16 @@ export const UsuariosDelete = async (req,res = response)=>{
 
     const {id} = req.params;
 
+    const model = await Usuario.findById(id);
+    
+    //Borrar Imagen de Raiz
+    if (model.img) {
+        const nombreArr   = model.img.split('/');
+        const nombre      = nombreArr[nombreArr.length - 1];
+        const [public_id] = nombre.split('.')
+        cloudinary.uploader.destroy(public_id);
+    }
+
     // Fisicamente borrado
     const usuario = await Usuario.findByIdAndDelete( id );
 

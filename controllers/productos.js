@@ -26,7 +26,7 @@ export const crearProducto = async(req, res = response)=>{
     await producto.save();
 
     res.status(201).json(producto);
-}
+} 
 
 //Obtener Productos - paginado - total - populate
 export const obtenerProductos = async (req = request,res = response)=>{
@@ -39,8 +39,10 @@ export const obtenerProductos = async (req = request,res = response)=>{
         Producto.find(query)
             .populate('usuario', 'nombre')
             .populate('categoria', 'nombre')
+            .sort('-updatedAt')
             .skip(Number(desde))
             .limit(Number(limite))
+            
     ]);
 
     res.json({
@@ -61,7 +63,7 @@ export const obtenerProducto = async(req,res)=>{
 
 }
 
-//Actualizar categoria
+//Actualizar Producto
 export const actualizarProducto = async(req,res)=>{
 
     const {id} = req.params;
@@ -82,6 +84,17 @@ export const actualizarProducto = async(req,res)=>{
 export const borrarProducto = async(req,res)=>{
 
     const {id} = req.params;
+
+    const model = await Producto.findById(id);
+    
+    //Borrar Imagen de Raiz
+    if (model.img) {
+        const nombreArr   = model.img.split('/');
+        const nombre      = nombreArr[nombreArr.length - 1];
+        const [public_id] = nombre.split('.')
+        cloudinary.uploader.destroy(public_id);
+    }
+
     const productoBorrado = await Producto.findByIdAndDelete( id );
 
     res.status(200).json(productoBorrado);

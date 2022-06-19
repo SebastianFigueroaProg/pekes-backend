@@ -12,13 +12,13 @@ router.post('/',validarArchivoSubir,cargarArchivo)
 router.put('/:coleccion/:id',[
     validarArchivoSubir,
     check('id','El id debe de ser un id de mongo').isMongoId(),
-    check('coleccion').custom(c=> coleccionPermitidas(c,['usuarios','productos'])),
+    check('coleccion').custom(c=> coleccionPermitidas(c,['usuarios','productos','carrusel'])),
     validarCampos
 ],actualizarImagenCloudinary)
 
 router.get('/:coleccion/:id',[
     check('id','El id debe de ser un id de mongo').isMongoId(),
-    check('coleccion').custom(c=> coleccionPermitidas(c,['usuarios','productos'])),
+    check('coleccion').custom(c=> coleccionPermitidas(c,['usuarios','productos','carrusel'])),
     validarCampos
 ],mostrarImagen)
 

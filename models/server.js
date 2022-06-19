@@ -7,6 +7,7 @@ import categorias from '../routes/categorias.js';
 import routes from '../routes/usuarios.js';
 import uploads from '../routes/uploads.js';
 import productos from '../routes/productos.js';
+import carrusel from '../routes/carrusel.js';
 import { dbConnection } from '../database/config.js';
 
 export default class Server{
@@ -20,7 +21,8 @@ export default class Server{
             categorias: '/categorias',
             productos:  '/productos',
             uploads:    '/uploads',
-            usuarios:   '/usuarios'            
+            usuarios:   '/usuarios',
+            carrusel:   '/carrusel'          
         }
 
         //Conectar a base de datos
@@ -62,6 +64,7 @@ export default class Server{
         this.app.use( this.paths.productos, productos);
         this.app.use( this.paths.uploads, uploads);
         this.app.use( this.paths.usuarios, routes);
+        this.app.use( this.paths.carrusel, carrusel);
     }
 
     listen(){

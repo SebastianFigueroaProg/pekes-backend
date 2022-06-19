@@ -5,7 +5,7 @@ import {fileURLToPath} from 'url';
 import { v2 as cloudinary } from 'cloudinary';
 cloudinary.config( process.env.CLOUDINARY_URL );
 
-import {Producto, Usuario} from '../models/index.js'
+import {Producto, Usuario, Carrusel} from '../models/index.js'
 
 export const cargarArchivo = async(req,res)=>{
     
@@ -44,6 +44,14 @@ export const actualizarImagenCloudinary = async(req,res) =>{
                 })
             }    
         break;
+        case 'carrusel':
+            modelo = await Carrusel.findById(id);
+            if (!modelo) {
+                return res.status(400).json({
+                    msg:`No existe un producto con el id ${id}`
+                })
+            }    
+        break;  
     
         default:
             return res.status(500).json({msg:'Se me olvido validar esto'})
@@ -87,6 +95,14 @@ export const mostrarImagen = async (req,res)=>{
         break;
         case 'productos':
             modelo = await Producto.findById(id);
+            if (!modelo) {
+                return res.status(400).json({
+                    msg:`No existe un producto con el id ${id}`
+                })
+            }    
+        break;
+        case 'carrusel':
+            modelo = await Carrusel.findById(id);
             if (!modelo) {
                 return res.status(400).json({
                     msg:`No existe un producto con el id ${id}`
