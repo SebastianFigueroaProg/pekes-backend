@@ -4,7 +4,7 @@ import { Categoria } from '../models/index.js';
 
 export const crearCategoria = async(req, res = response)=>{
 
-    const nombre = req.body.nombre.toUpperCase();
+    const nombre = req.body.nombre.trim().toUpperCase();
 
     const categoriaDB = await Categoria.findOne({nombre});
 

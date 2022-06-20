@@ -7,7 +7,7 @@ export const crearImgCarrusel = async(req, res=response)=>{
     
     const {nombre} = req.body;
 
-    const nameDB = nombre.toUpperCase();
+    const nameDB = nombre.trim().toUpperCase();
 
     const carruselDB = await Carrusel.findOne({nombre:nameDB});    
     
