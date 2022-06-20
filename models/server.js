@@ -39,9 +39,12 @@ export default class Server{
         await dbConnection();
     }
 
-    middlewares(){
+    middlewares(){        
         //CORS
-        this.app.use( cors() );
+        this.app.use( cors({
+            origin:'*',
+            credentials:true
+        }) );
 
         //Lectura u parseo del body
         this.app.use(express.json());
