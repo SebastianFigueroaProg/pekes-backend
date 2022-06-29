@@ -1,5 +1,7 @@
 import { response } from "express";
 import { Producto } from '../models/index.js';
+import { v2 as cloudinary } from 'cloudinary';
+cloudinary.config( process.env.CLOUDINARY_URL );
 
 export const crearProducto = async(req, res = response)=>{
 

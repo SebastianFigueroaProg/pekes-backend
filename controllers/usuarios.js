@@ -1,6 +1,8 @@
 import {request,response} from 'express';
 import bcryptsjs from 'bcryptjs';
 import Usuario from '../models/usuario.js';
+import { v2 as cloudinary } from 'cloudinary';
+cloudinary.config( process.env.CLOUDINARY_URL );
 
 
 export const UsuariosGet = async (req = request,res = response)=>{

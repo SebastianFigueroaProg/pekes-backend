@@ -8,6 +8,7 @@ import routes from '../routes/usuarios.js';
 import uploads from '../routes/uploads.js';
 import productos from '../routes/productos.js';
 import carrusel from '../routes/carrusel.js';
+import os from 'os';
 import { dbConnection } from '../database/config.js';
 
 export default class Server{
@@ -42,9 +43,9 @@ export default class Server{
     middlewares(){        
         //CORS
         this.app.use( cors({
-            origin:'*',
+            origin: os.hostname(),
             credentials:true
-        }) );
+        }));
 
         //Lectura u parseo del body
         this.app.use(express.json());
